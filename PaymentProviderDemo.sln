@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sitecore.Commerce.Engine", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.Sample.Habitat", "src\Plugin.Sample.Habitat\Plugin.Sample.Habitat.csproj", "{D7114603-EAFB-4502-9163-5258AF358BDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Ingenico", "Plugin.Ingenico\Plugin.Ingenico.csproj", "{D2300988-A3E8-40A6-A60B-D93E0E7CE964}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D7114603-EAFB-4502-9163-5258AF358BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7114603-EAFB-4502-9163-5258AF358BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7114603-EAFB-4502-9163-5258AF358BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2300988-A3E8-40A6-A60B-D93E0E7CE964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2300988-A3E8-40A6-A60B-D93E0E7CE964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2300988-A3E8-40A6-A60B-D93E0E7CE964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2300988-A3E8-40A6-A60B-D93E0E7CE964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
