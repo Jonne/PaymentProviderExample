@@ -9,6 +9,7 @@ namespace Sitecore.Commerce.Plugin.Sample
     using System.Reflection;
     using Microsoft.Extensions.DependencyInjection;
     using Sitecore.Commerce.Core;
+    using Sitecore.Commerce.Plugin.Orders;
     using Sitecore.Framework.Configuration;
     using Sitecore.Framework.Pipelines.Definitions.Extensions;
 
@@ -30,10 +31,15 @@ namespace Sitecore.Commerce.Plugin.Sample
 
             services.Sitecore().Pipelines(config => config
 
+            .ConfigurePipeline<IPendingOrdersMinionPipeline>(d =>
+            {
+                d.Add<ValidateIngenicoPaymentBlock>().After<ValidatePendingOrderBlock>();
+            })
+
              .AddPipeline<ISamplePipeline, SamplePipeline>(
                     configure =>
                         {
-                            configure.Add<SampleBlock>();
+                            configure.Add<ValidateIngenicoPaymentBlock>();
                         })
 
                .ConfigurePipeline<IConfigureServiceApiPipeline>(configure => configure.Add<ConfigureServiceApiBlock>()));
