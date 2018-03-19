@@ -44,10 +44,10 @@
         "Database": "SitecoreCommerce9_Global",
         "EffectiveDate": "0001-01-01T00:00:00",
         "IsVisible": false,
-        "Password": "",
-        "Server": ".",
-        "TrustedConnection": true,
-        "UserName": "",
+        "Password": "my_Sup3rSecret!!",
+        "Server": "mssql",
+        "TrustedConnection": false,
+        "UserName": "sa",
         "View": "EntityStoreSqlPolicy"
       },
       {
@@ -93,10 +93,10 @@
           "Database": "SitecoreCommerce_Global",
           "EffectiveDate": "0001-01-01T00:00:00",
           "IsVisible": false,
-          "Password": "",
-          "Server": "",
-          "TrustedConnection": true,
-          "UserName": "",
+          "Password": "my_Sup3rSecret!!",
+          "Server": "mssql",
+          "TrustedConnection": false,
+          "UserName": "sa",
           "View": "EntityStoreSqlPolicy"
         }
       }

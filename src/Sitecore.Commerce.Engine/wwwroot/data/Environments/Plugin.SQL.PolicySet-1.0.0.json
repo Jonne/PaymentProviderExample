@@ -9,10 +9,10 @@
     "$values": [
       {
         "$type": "Sitecore.Commerce.Plugin.SQL.EntityStoreSqlPolicy, Sitecore.Commerce.Plugin.SQL",
-        "TrustedConnection": true,
-        "UserName": "",
-        "Password": "",
-        "Server": ".",
+        "TrustedConnection": false,
+        "UserName": "sa",
+        "Password": "my_Sup3rSecret!!",
+        "Server": "mssql",
         "Database": "SitecoreCommerce9_SharedEnvironments",
         "AdditionalParameters": "",
         "ConnectTimeout": 120000,

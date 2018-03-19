@@ -2,36 +2,36 @@ version: '2.2'
 
 services:
  mssql:
-  image: microsoft/mssql-server-windows-express
+  image: sitecorecommercedocker_mssql
   mem_limit: 2048m
   cpu_count: 4
   networks:
     app_net:
-      ipv4_address: 172.16.238.11  
+      ipv4_address: 172.16.3.3 
   environment:
     ACCEPT_EULA: "Y"
     sa_password: "my_Sup3rSecret!!"
 
  solr:
-  image: avivasolutionsnl.azurecr.io/mercury-solr:9.0
+  image: sitecorecommercedocker_solr
   mem_limit: 4096m
   networks:
     app_net:  
-      ipv4_address: 172.16.238.10
+      ipv4_address: 172.16.3.5
 
  xconnect:
-  image: avivasolutionsnl.azurecr.io/sxc9-xconnect:9.0
+  image: sitecorecommercedocker_xconnect
   volumes:
     - .\logs\xconnect:C:\inetpub\wwwroot\xconnect\App_data\Logs
   networks:
     app_net:
-      ipv4_address: 172.16.238.12    
+      ipv4_address: 172.16.3.6  
   depends_on:
     - mssql
     - solr
 
  sitecore:
-  image: avivasolutionsnl.azurecr.io/mercury-sitecore:9.0
+  image: sitecorecommercedocker_sitecore
   cpu_count: 6
   volumes:
     - .\logs\sitecore:c:\inetpub\wwwroot\sitecore\App_Data\logs
@@ -43,10 +43,10 @@ services:
     - solr
   networks:
     app_net:
-      ipv4_address: 172.16.238.13    
+      ipv4_address: 172.16.3.4   
 
  commerce:
-  image: avivasolutionsnl.azurecr.io/mercury-commerce:9.0
+  build: ./Docker/commerce
   cpu_count: 4
   volumes:
     - .\logs\commerce\CommerceAuthoring_Sc9:C:\inetpub\wwwroot\CommerceAuthoring_Sc9\wwwroot\logs
@@ -65,7 +65,7 @@ services:
     - "4022:4022"
   networks:
     app_net:
-      ipv4_address: 172.16.238.14   
+      ipv4_address: 172.16.3.2  
 
 networks:
   app_net:
@@ -73,5 +73,5 @@ networks:
       driver: default
       config:
         -
-          subnet: 172.16.238.0/24
-          gateway: 172.16.238.1
+          subnet: 172.16.3.0/24
+          gateway: 172.16.3.1

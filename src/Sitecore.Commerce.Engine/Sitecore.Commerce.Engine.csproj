@@ -48,6 +48,14 @@
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
 
     <PackageReference Include="Sitecore.Commerce.Plugin.CacheWatcher" Version="2.0.*" />
+
+    <PackageReference Include="Sitecore.Commerce.Plugin.Carts" Version="2.0.489" />
+
+    <PackageReference Include="Sitecore.Commerce.Plugin.Shops" Version="2.0.884" />
+
+    <PackageReference Include="Sitecore.Commerce.Plugin.SQL" Version="2.0.407" />
+
+    <PackageReference Include="Sitecore.Commerce.Plugin.Views" Version="2.0.884" />
     <PackageReference Include="Sitecore.Commerce.Provider.FileSystem" Version="2.0.*" />
 
     <PackageReference Include="Sitecore.Commerce.Plugin.Search.Azure" Version="2.0.*" />
