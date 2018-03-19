@@ -4,9 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sitecore.Commerce.Plugin.Sample
+namespace Plugin.Ingenico.Pipelines
 {
     using Microsoft.Extensions.Logging;
+    using Plugin.Ingenico.Pipelines.Arguments;
     using Sitecore.Commerce.Core;
     using Sitecore.Framework.Pipelines;
 
@@ -21,7 +22,7 @@ namespace Sitecore.Commerce.Plugin.Sample
     ///     </cref>
     /// </seealso>
     /// <seealso cref="T:Sitecore.Commerce.Plugin.Sample.ISamplePipeline" />
-    public class SamplePipeline : CommercePipeline<SampleArgument, SampleEntity>, ISamplePipeline
+    public class UpdateIngenicoPaymentPipeline : CommercePipeline<UpdateIngenicoPaymentArgument, bool>, IUpdateIngenicoPaymentPipeline
     {
         /// <inheritdoc />
         /// <summary>
@@ -29,7 +30,7 @@ namespace Sitecore.Commerce.Plugin.Sample
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         /// <param name="loggerFactory">The logger factory.</param>
-        public SamplePipeline(IPipelineConfiguration<ISamplePipeline> configuration, ILoggerFactory loggerFactory)
+        public UpdateIngenicoPaymentPipeline(IPipelineConfiguration<IUpdateIngenicoPaymentPipeline> configuration, ILoggerFactory loggerFactory)
             : base(configuration, loggerFactory)
         {
         }

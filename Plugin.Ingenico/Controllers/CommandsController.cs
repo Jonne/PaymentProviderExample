@@ -10,7 +10,8 @@ namespace Sitecore.Commerce.Plugin.Sample
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http.OData;
-
+    using global::Plugin.Ingenico.Commands;
+    using global::Plugin.Ingenico.Components;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
     using Sitecore.Commerce.Core;
@@ -57,6 +58,25 @@ namespace Sitecore.Commerce.Plugin.Sample
             {
                 paymentComponent
             });
+            return (IActionResult)new ObjectResult((object)command);
+        }
+
+        [HttpPut]
+        [Route("UpdateIngenicoPayment()")]
+        public async Task<IActionResult> UpdateIngenicoPayment([FromBody] ODataActionParameters value)
+        {
+            CommandsController commandsController = this;
+            if (!commandsController.ModelState.IsValid || value == null)
+            {
+                return (IActionResult)new BadRequestObjectResult(commandsController.ModelState);
+            }
+
+            string orderId = value["orderId"].ToString();
+            string brand = value["brand"].ToString();
+            string status = value["status"].ToString();
+
+            UpdateIngenicoPaymentCommand command = commandsController.Command<UpdateIngenicoPaymentCommand>();
+            bool result = await command.Process(commandsController.CurrentContext, orderId, brand, status);
             return (IActionResult)new ObjectResult((object)command);
         }
     }

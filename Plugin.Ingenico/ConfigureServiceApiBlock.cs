@@ -1,31 +1,14 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConfigureServiceApiBlock.cs" company="Sitecore Corporation">
-//   Copyright (c) Sitecore Corporation 1999-2017
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using Plugin.Ingenico.Components;
+using Sitecore.Commerce.Core;
+using Sitecore.Commerce.Core.Commands;
+using Sitecore.Framework.Conditions;
+using Sitecore.Framework.Pipelines;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.OData.Builder;
 
-namespace Sitecore.Commerce.Plugin.Sample
+namespace Plugin.Ingenico
 {
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.OData.Builder;
-
-    using Sitecore.Commerce.Core;
-    using Sitecore.Commerce.Core.Commands;
-    using Sitecore.Framework.Conditions;
-    using Sitecore.Framework.Pipelines;
-
-    /// <summary>
-    /// Defines a block which configures the OData model
-    /// </summary>
-    /// <seealso>
-    ///     <cref>
-    ///         Sitecore.Framework.Pipelines.PipelineBlock{Microsoft.AspNetCore.OData.Builder.ODataConventionModelBuilder,
-    ///         Microsoft.AspNetCore.OData.Builder.ODataConventionModelBuilder,
-    ///         Sitecore.Commerce.Core.CommercePipelineExecutionContext}
-    ///     </cref>
-    /// </seealso>
-    [PipelineDisplayName("SamplePluginConfigureServiceApiBlock")]
+    [PipelineDisplayName("Plugin.Ingenico:blocks:ConfigureServiceApi")]
     public class ConfigureServiceApiBlock : PipelineBlock<ODataConventionModelBuilder, ODataConventionModelBuilder, CommercePipelineExecutionContext>
     {
         /// <summary>
@@ -43,21 +26,18 @@ namespace Sitecore.Commerce.Plugin.Sample
         public override Task<ODataConventionModelBuilder> Run(ODataConventionModelBuilder modelBuilder, CommercePipelineExecutionContext context)
         {
             Condition.Requires(modelBuilder).IsNotNull($"{this.Name}: The argument cannot be null.");
+            modelBuilder.AddEntityType(typeof(IngenicoPaymentComponent));
 
-            // Add the entities
-            modelBuilder.AddEntityType(typeof(SampleEntity));
-
-            // Add the entity sets
-            modelBuilder.EntitySet<SampleEntity>("Sample");
-
-            // Add complex types
-
-            // Add unbound functions
-
-            // Add unbound actions
-            var configuration = modelBuilder.Action("SampleCommand");
-            configuration.Parameter<string>("Id");
+            var configuration = modelBuilder.Action("AddIngenicoPayment");
+            configuration.Parameter<string>("cartId");
+            configuration.Parameter<IngenicoPaymentComponent>("payment");
             configuration.ReturnsFromEntitySet<CommerceCommand>("Commands");
+
+            var updateConfiguration = modelBuilder.Action("UpdateIngenicoPayment");
+            updateConfiguration.Parameter<string>("orderId");
+            updateConfiguration.Parameter<string>("brand");
+            updateConfiguration.Parameter<string>("status");
+            updateConfiguration.ReturnsFromEntitySet<CommerceCommand>("Commands");
 
             return Task.FromResult(modelBuilder);
         }

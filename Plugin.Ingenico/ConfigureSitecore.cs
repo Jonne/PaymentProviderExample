@@ -4,12 +4,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sitecore.Commerce.Plugin.Sample
+namespace Plugin.Ingenico
 {
     using System.Reflection;
+    using global::Plugin.Ingenico.Pipelines;
+    using global::Plugin.Ingenico.Pipelines.Blocks;
     using Microsoft.Extensions.DependencyInjection;
     using Sitecore.Commerce.Core;
     using Sitecore.Commerce.Plugin.Orders;
+    using Sitecore.Commerce.Plugin.Payments;
     using Sitecore.Framework.Configuration;
     using Sitecore.Framework.Pipelines.Definitions.Extensions;
 
@@ -30,19 +33,25 @@ namespace Sitecore.Commerce.Plugin.Sample
             services.RegisterAllPipelineBlocks(assembly);
 
             services.Sitecore().Pipelines(config => config
-
+            .ConfigurePipeline<IConfigureServiceApiPipeline>(configure => configure.Add<Plugin.Ingenico.ConfigureServiceApiBlock>())
             .ConfigurePipeline<IPendingOrdersMinionPipeline>(d =>
             {
                 d.Add<ValidateIngenicoPaymentBlock>().After<ValidatePendingOrderBlock>();
             })
-
-             .AddPipeline<ISamplePipeline, SamplePipeline>(
+            .ConfigurePipeline<IGetPaymentMethodsPipeline>(d =>
+            {
+                d.Replace<Sitecore.Commerce.Plugin.Management.TranslateItemsToPaymentMethodsBlock, TranslateItemsToPaymentMethodsBlock>();
+            })
+            .ConfigurePipeline<IGetPaymentOptionsPipeline>(d =>
+            {
+                d.Replace<Sitecore.Commerce.Plugin.Management.TranslateItemsToPaymentOptionsBlock, TranslateItemsToPaymentOptionsBlock>();
+            })
+             .AddPipeline<IUpdateIngenicoPaymentPipeline, UpdateIngenicoPaymentPipeline>(
                     configure =>
                         {
-                            configure.Add<ValidateIngenicoPaymentBlock>();
+                            configure.Add<UpdateIngenicoPaymentBlock>();
                         })
-
-               .ConfigurePipeline<IConfigureServiceApiPipeline>(configure => configure.Add<ConfigureServiceApiBlock>()));
+               );
 
             services.RegisterAllCommands(assembly);
         }

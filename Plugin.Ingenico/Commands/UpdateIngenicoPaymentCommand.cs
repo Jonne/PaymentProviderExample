@@ -4,10 +4,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sitecore.Commerce.Plugin.Sample
+namespace Plugin.Ingenico.Commands
 {
     using System;
     using System.Threading.Tasks;
+    using Plugin.Ingenico.Pipelines;
+    using Plugin.Ingenico.Pipelines.Arguments;
     using Sitecore.Commerce.Core;
     using Sitecore.Commerce.Core.Commands;
 
@@ -15,9 +17,9 @@ namespace Sitecore.Commerce.Plugin.Sample
     /// <summary>
     /// Defines the SampleCommand command.
     /// </summary>
-    public class SampleCommand : CommerceCommand
+    public class UpdateIngenicoPaymentCommand : CommerceCommand
     {
-        private readonly ISamplePipeline _pipeline;
+        private readonly IUpdateIngenicoPaymentPipeline pipeline;
 
         /// <inheritdoc />
         /// <summary>
@@ -27,9 +29,9 @@ namespace Sitecore.Commerce.Plugin.Sample
         /// The pipeline.
         /// </param>
         /// <param name="serviceProvider">The service provider</param>
-        public SampleCommand(ISamplePipeline pipeline, IServiceProvider serviceProvider) : base(serviceProvider)
+        public UpdateIngenicoPaymentCommand(IUpdateIngenicoPaymentPipeline pipeline, IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            this._pipeline = pipeline;
+            this.pipeline = pipeline;
         }
 
         /// <summary>
@@ -44,14 +46,18 @@ namespace Sitecore.Commerce.Plugin.Sample
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public async Task<SampleEntity> Process(CommerceContext commerceContext, object parameter)
+        public async Task<bool> Process(CommerceContext commerceContext, string orderId, string brand, string status)
         {
             using (var activity = CommandActivity.Start(commerceContext, this))
             {
-                var arg = new SampleArgument(parameter);
-                var result = await this._pipeline.Run(arg, new CommercePipelineExecutionContextOptions(commerceContext));
+                var arg = new UpdateIngenicoPaymentArgument
+                {
+                    OrderId = orderId,
+                    Brand = brand,
+                    Status = status
+                };
 
-                return result;
+                return await pipeline.Run(arg, new CommercePipelineExecutionContextOptions(commerceContext));
             }
         }
     }
