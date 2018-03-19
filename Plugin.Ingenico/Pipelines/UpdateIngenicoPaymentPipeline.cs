@@ -11,17 +11,6 @@ namespace Plugin.Ingenico.Pipelines
     using Sitecore.Commerce.Core;
     using Sitecore.Framework.Pipelines;
 
-    /// <inheritdoc />
-    /// <summary>
-    ///  Defines the SamplePipeline pipeline.
-    /// </summary>
-    /// <seealso>
-    ///     <cref>
-    ///         Sitecore.Commerce.Core.CommercePipeline{Sitecore.Commerce.Plugin.Sample.SampleArgument,
-    ///         Sitecore.Commerce.Plugin.Sample.SampleEntity}
-    ///     </cref>
-    /// </seealso>
-    /// <seealso cref="T:Sitecore.Commerce.Plugin.Sample.ISamplePipeline" />
     public class UpdateIngenicoPaymentPipeline : CommercePipeline<UpdateIngenicoPaymentArgument, bool>, IUpdateIngenicoPaymentPipeline
     {
         /// <inheritdoc />

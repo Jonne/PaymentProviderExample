@@ -9,10 +9,6 @@ namespace Plugin.Ingenico.Components
     using Sitecore.Commerce.Core;
     using Sitecore.Commerce.Plugin.Payments;
 
-    /// <inheritdoc />
-    /// <summary>
-    /// The SampleComponent.
-    /// </summary>
     public class IngenicoPaymentComponent : PaymentComponent
     {
         /// <summary>

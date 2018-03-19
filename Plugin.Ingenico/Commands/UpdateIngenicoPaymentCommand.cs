@@ -13,10 +13,6 @@ namespace Plugin.Ingenico.Commands
     using Sitecore.Commerce.Core;
     using Sitecore.Commerce.Core.Commands;
 
-    /// <inheritdoc />
-    /// <summary>
-    /// Defines the SampleCommand command.
-    /// </summary>
     public class UpdateIngenicoPaymentCommand : CommerceCommand
     {
         private readonly IUpdateIngenicoPaymentPipeline pipeline;
