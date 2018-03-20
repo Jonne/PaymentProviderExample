@@ -9,7 +9,7 @@
     "EncryptionSID": "Enter a valid SID for a domain registered user",
     "EncryptionKeyStorageLocation": "c:\\Encryption-Keys\\",
     "SitecoreIdentityServerUrl": "https://commerce:5050",
-    "AllowedOrigins": [ "https://commerce:4200", "http://commerce:4200", "http://sitecore" ],
+    "AllowedOrigins": [ "https://commerce:4200", "http://commerce:4200", "http://sitecore", "http://commerce:4000" ],
     "AntiForgeryEnabled": false,
     "UseHttpsInKestrel": true,
     "SslPort": 5000,
