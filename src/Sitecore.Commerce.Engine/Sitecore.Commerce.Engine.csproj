@@ -51,6 +51,12 @@
 
     <PackageReference Include="Sitecore.Commerce.Plugin.Carts" Version="2.0.489" />
 
+    <PackageReference Include="Sitecore.Commerce.Plugin.Catalog" Version="2.0.1022" />
+
+    <PackageReference Include="Sitecore.Commerce.Plugin.Orders" Version="2.0.587" />
+
+    <PackageReference Include="Sitecore.Commerce.Plugin.Pricing" Version="2.0.517" />
+
     <PackageReference Include="Sitecore.Commerce.Plugin.Shops" Version="2.0.884" />
 
     <PackageReference Include="Sitecore.Commerce.Plugin.SQL" Version="2.0.407" />

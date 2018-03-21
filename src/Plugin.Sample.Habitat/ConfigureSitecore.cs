@@ -46,6 +46,9 @@ namespace Plugin.Sample.Habitat
                         {
                             c.Add<RegisteredPluginBlock>().After<RunningPluginsBlock>();
                         }));
+
+            services.ConfigureCartPipelines();
+            services.ConfigureOrdersPipelines();
         }
     }
 }
